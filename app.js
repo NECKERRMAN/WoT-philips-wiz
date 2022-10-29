@@ -10,7 +10,7 @@ const initBuld = async () => {
 
     // whenever the bulb sends a message, log it to the console
     const details = await bulb.getPilot()
-    console.log(details);
+    //console.log(details);
 
     return bulb;
 };
