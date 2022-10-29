@@ -1,0 +1,30 @@
+{
+  "name": "wot-philips-wiz",
+  "version": "1.0.0",
+  "description": "Code for escape room",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node app.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NECKERRMAN/WoT-philips-wiz.git"
+  },
+  "keywords": [
+    "wiz",
+    "philips",
+    "led"
+  ],
+  "author": "NECKERRMAN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NECKERRMAN/WoT-philips-wiz/issues"
+  },
+  "homepage": "https://github.com/NECKERRMAN/WoT-philips-wiz#readme",
+  "dependencies": {
+    "nodemon": "^2.0.20",
+    "wikari": "^0.1.0"
+  }
+}
