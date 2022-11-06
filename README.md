@@ -17,3 +17,5 @@ This project is created by
 ## Explanation
 
 When the player(s) connect the correct wires in the electricity box the light turns on. 
+
+cd into api -> nodemon index.js
