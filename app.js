@@ -2,7 +2,7 @@ import { discover, SCENES } from "wikari";
 
 const initBuld = async () => {
     // Find bulb on network
-    const bulbs = await discover({ addr: process.env.WIZ_ADDR });
+    const bulbs = await discover({ addr: process.env.ADDRESS });
     const bulb = bulbs[0];
 
     // Return if no bulb found
@@ -14,6 +14,7 @@ const initBuld = async () => {
 
     return bulb;
 };
+
 
 // Toggle Bulb
 const toggleBulb = async () => {
