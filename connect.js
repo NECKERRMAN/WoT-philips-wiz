@@ -1,10 +1,14 @@
 import * as mqtt from "mqtt"  // import everything inside the mqtt module and give it the namespace "mqtt"
+import express from "express";
+import { toggleBulb, setBulb, initBuld, setBlackLight, disconnectBulb } from "./app.js";
+import fetch from "node-fetch";
 
-const host = MQTT SERVER TO DO
-const port = '1883'
-const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
+/* MQTT SERVER CONST */
+const host = '' // IP address of the MQTT server
+const mqtt_port = '1883' // Port of the MQTT server
+const clientId = `mqtt_${Math.random().toString(16).slice(3)}` // Generate a random client ID
 
-const connectUrl = `mqtt://${host}:${port}`
+const connectUrl = `mqtt://${host}:${mqtt_port}`
 
 const client = mqtt.connect(connectUrl, {
   clientId,
@@ -15,51 +19,38 @@ const client = mqtt.connect(connectUrl, {
   reconnectPeriod: 1000,
 })
 
-const subTopic = 'Room/My room/Props/Box/outbox'
-const pubTopic = 'Room/My room/Props/Box/inbox'
+const publishTopic = 'Room/My room/Props/lamp/outbox'
+const subscribeTopic = 'Room/My room/Props/lamp/inbox'
 
 client.on('connect', () => {
-  console.log('Connected')
-  client.subscribe([pubTopic], () => {
-    console.log(`Subscribe to topic '${pubTopic}'`)
+  client.subscribe([subscribeTopic], () => {
+    console.log(`Subscribe to topic '${subscribeTopic}'`)
   })
 })
 
-client.on('message', (subTopic, payload) => {
-    console.log(payload.toString())
+client.on('message', (publishTopic, payload) => {
+    const message = payload.toString();
+
+    if (message === '1') {
+      // Turn bulb on
+      fetch('http://localhost:3000/on', {
+        method: 'POST',
+    })
+    } else if (message === '0') {
+        // turn bulb off
+        fetch('http://localhost:3000/off', {
+          method: 'POST',
+      })
+    } else {
+      return;
+    }
 
 })
 
 client.on('connect', () => {
-    client.publish(subTopic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
-      console.log('Published')
+    client.publish(publishTopic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
     if (error) {
         console.error(error)
     }
     })
 })
-
-/* 
-const subTopic = 'Room/My room/Props/Box/outbox'
-const pubTopic = 'Room/My room/Props/Box/inbox'
-
-client.on('connect', () => {
-  console.log('Connected')
-  client.publish(topic, 'Hello from Node.js')
-}) 
-
-client.on('message', (pubTopic, payload) => {
-  console.log('Received Message:', subTopic, payload.toString())
-
-})
-
-client.on('connect', () => {
-  client.publish(subTopic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
-  if (error) {
-      console.error(error)
-  } else {
-    console.log('Message sent')
-}
-  })
-})
- */

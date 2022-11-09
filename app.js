@@ -2,7 +2,7 @@ import { discover, SCENES } from "wikari";
 
 const initBuld = async () => {
     // Find bulb on network
-    const bulbs = await discover({ addr: process.env.ADDRESS });
+    const bulbs = await discover({ addr: "" });
     const bulb = bulbs[0];
 
     // Return if no bulb found
@@ -41,6 +41,8 @@ const setBulb = async (state) => {
 const setBlackLight = async (BRIGHTNESS, TEMP) => {
     // Init bulb   
     const bulb = await initBuld();
+    
+    if (!bulb) return;
     // set the bulb brightness to 10%
     await bulb.brightness(BRIGHTNESS);
     await bulb.white(TEMP);

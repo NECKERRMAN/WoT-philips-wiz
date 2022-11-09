@@ -5,8 +5,8 @@ const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
-    initBuld();
-    res.send('Hello World!')
+    const bulb = initBuld();
+    res.send(bulb)
 })
 
 // Opposite of current state
