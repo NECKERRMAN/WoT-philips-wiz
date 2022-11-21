@@ -2,7 +2,8 @@ import { discover, SCENES } from "wikari";
 
 const initBuld = async () => {
     // Find bulb on network
-    const bulbs = await discover({ addr: "" });
+    const bulbs = await discover({ addr: "192.168.50.255" });
+    console.log(bulbs);
     const bulb = bulbs[0];
 
     // Return if no bulb found
